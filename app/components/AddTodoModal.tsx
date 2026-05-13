@@ -48,7 +48,12 @@ export default function AddTodoModal({ isOpen, onConfirm, onCancel }: Props) {
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30">
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-label="Add new element to list"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/30"
+    >
       <div
         className={`w-full max-w-md px-4 transition-transform duration-300 ease-out ${
           entered ? 'translate-y-0' : 'translate-y-[-100vh]'
@@ -73,6 +78,7 @@ export default function AddTodoModal({ isOpen, onConfirm, onCancel }: Props) {
             Add item to list
           </label>
           <input
+            id="add-item-to-list-input"
             name="add-item-to-list-input"
             autoFocus
             value={text}

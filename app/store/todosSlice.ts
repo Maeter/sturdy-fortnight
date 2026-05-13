@@ -8,13 +8,13 @@ export type Todo = {
 type TodosState = {
   items: Todo[]
   snapshot: Todo[] | null
-  selectedId: string | null
+  selectedIds: string[]
 }
 
 const initialState: TodosState = {
   items: [],
   snapshot: null,
-  selectedId: null,
+  selectedIds: [],
 }
 
 const todosSlice = createSlice({
@@ -26,23 +26,27 @@ const todosSlice = createSlice({
       state.items.push({ id: crypto.randomUUID(), text: action.payload })
     },
     selectTodo(state, action: PayloadAction<string>) {
-      state.selectedId =
-        state.selectedId === action.payload ? null : action.payload
+      const id = action.payload
+      state.selectedIds = state.selectedIds.includes(id)
+        ? state.selectedIds.filter((selectedId) => selectedId !== id)
+        : [...state.selectedIds, id]
     },
-    deleteTodo(state, action: PayloadAction<string>) {
+    deleteSelected(state) {
       state.snapshot = [...state.items]
-      state.items = state.items.filter((item) => item.id !== action.payload)
-      state.selectedId = null
+      state.items = state.items.filter(
+        (item) => !state.selectedIds.includes(item.id)
+      )
+      state.selectedIds = []
     },
     undo(state) {
       if (state.snapshot !== null) {
         state.items = state.snapshot
         state.snapshot = null
-        state.selectedId = null
+        state.selectedIds = []
       }
     },
   },
 })
 
-export const { addTodo, selectTodo, deleteTodo, undo } = todosSlice.actions
+export const { addTodo, selectTodo, deleteSelected, undo } = todosSlice.actions
 export default todosSlice.reducer

@@ -6,19 +6,24 @@ import { selectTodo } from '../store/todosSlice'
 export default function TodoList() {
   const dispatch = useAppDispatch()
   const items = useAppSelector((state) => state.todos.items)
-  const selectedId = useAppSelector((state) => state.todos.selectedId)
+  const selectedIds = useAppSelector((state) => state.todos.selectedIds)
 
-  if (items.length === 0) return null
+  if (items.length === 0)
+    return (
+      <p className="mt-6 mb-4 text-center text-sm text-zinc-400">
+        No items yet. Add one!
+      </p>
+    )
 
   return (
-    <ul className="mt-4 flex flex-col gap-px rounded-lg border border-zinc-100 bg-zinc-50 p-2">
+    <ul className="mt-6 mb-4 flex flex-col gap-px rounded-md border border-zinc-100 bg-zinc-50 p-2">
       {items.map((item) => {
-        const isSelected = item.id === selectedId
+        const isSelected = selectedIds.includes(item.id)
         return (
           <li
             key={item.id}
             onClick={() => dispatch(selectTodo(item.id))}
-            className={`cursor-pointer rounded-lg border p-2 text-sm transition-colors ${
+            className={`cursor-pointer rounded-md border px-2 py-1 text-sm transition-colors ${
               isSelected
                 ? 'border-blue-800 bg-blue-800 text-white'
                 : 'border-zinc-50 text-zinc-700 hover:border-zinc-100 hover:bg-zinc-100'

@@ -4,11 +4,13 @@ import { useState } from 'react'
 import Button from './Button'
 import AddTodoModal from './AddTodoModal'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
-import { addTodo, deleteTodo, undo } from '../store/todosSlice'
+import { addTodo, deleteSelected, undo } from '../store/todosSlice'
 
 export default function TodoFooter() {
   const dispatch = useAppDispatch()
-  const selectedId = useAppSelector((state) => state.todos.selectedId)
+  const hasSelection = useAppSelector(
+    (state) => state.todos.selectedIds.length > 0
+  )
   const hasHistory = useAppSelector((state) => state.todos.snapshot !== null)
   const [isModalOpen, setIsModalOpen] = useState(false)
 
@@ -33,8 +35,8 @@ export default function TodoFooter() {
       </Button>
       <Button
         variant="outline"
-        onClick={() => selectedId && dispatch(deleteTodo(selectedId))}
-        disabled={!selectedId}
+        onClick={() => dispatch(deleteSelected())}
+        disabled={!hasSelection}
       >
         Delete
       </Button>

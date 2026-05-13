@@ -11,7 +11,7 @@ export default function Button({
   ...props
 }: ButtonProps) {
   const base =
-    'px-4 py-2 rounded-full text-sm font-medium transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed'
+    'px-4 py-2 uppercase rounded-full text-sm font-medium transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed'
 
   const variants = {
     filled: 'bg-blue-800 text-white hover:bg-blue-700 active:bg-blue-900',

@@ -14,7 +14,7 @@ export default function Home() {
         }
         footer={<TodoFooter />}
       >
-        <p className="text-center text-sm text-zinc-500">
+        <p className="mb-4 text-center text-sm text-zinc-500">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
           minim veniam, quis nostrud exercitation ullamco.

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { IconRotate } from '@tabler/icons-react'
 import Button from './Button'
 import AddTodoModal from './AddTodoModal'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
@@ -31,7 +32,7 @@ export default function TodoFooter() {
         onClick={() => dispatch(undo())}
         disabled={!hasHistory}
       >
-        Undo
+        <IconRotate size={16} className="rotate-180 transform" />
       </Button>
       <Button
         variant="outline"

@@ -1,4 +1,5 @@
 import Card from './components/Card'
+import TodoFooter from './components/TodoFooter'
 
 export default function Home() {
   return (
@@ -9,19 +10,7 @@ export default function Home() {
             This is a technical proof
           </h2>
         }
-        footer={
-          <>
-            <button className="rounded-lg border border-blue-800 px-4 py-2 text-sm text-blue-800">
-              Undo
-            </button>
-            <button className="rounded-lg border border-blue-800 px-4 py-2 text-sm text-blue-800">
-              Add
-            </button>
-            <button className="rounded-lg bg-blue-800 px-4 py-2 text-sm text-white">
-              Delete
-            </button>
-          </>
-        }
+        footer={<TodoFooter />}
       >
         <p className="text-sm text-zinc-500">Your TODO list goes here.</p>
       </Card>

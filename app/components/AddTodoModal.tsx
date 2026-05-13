@@ -55,31 +55,31 @@ export default function AddTodoModal({ isOpen, onConfirm, onCancel }: Props) {
         }`}
       >
         <Card
-          title={
-            <h2 className="text-lg font-semibold text-zinc-800">New task</h2>
-          }
           footer={
-            <>
+            <div className="flex w-full justify-end gap-2">
               <Button variant="outline" onClick={onCancel}>
                 Cancel
               </Button>
-              <Button
-                onClick={handleConfirm}
-                disabled={!text.trim()}
-                className="ml-auto"
-              >
+              <Button onClick={handleConfirm} disabled={!text.trim()}>
                 Add
               </Button>
-            </>
+            </div>
           }
         >
+          <label
+            htmlFor="add-item-to-list-input"
+            className="mb-2 block font-medium text-zinc-600"
+          >
+            Add item to list
+          </label>
           <input
+            name="add-item-to-list-input"
             autoFocus
             value={text}
             onChange={(e) => setText(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder="Task description…"
-            className="w-full rounded-full border border-zinc-200 px-4 py-2 text-sm text-zinc-800 focus:ring-2 focus:ring-blue-800 focus:outline-none"
+            className="w-full rounded-md border border-zinc-200 px-4 py-2 text-sm text-zinc-800 focus:ring-2 focus:ring-blue-800 focus:outline-none"
           />
         </Card>
       </div>

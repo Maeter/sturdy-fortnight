@@ -3,7 +3,6 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 export type Todo = {
   id: string
   text: string
-  done: boolean
 }
 
 type TodosState = {
@@ -25,7 +24,6 @@ const todosSlice = createSlice({
       state.items.push({
         id: crypto.randomUUID(),
         text: action.payload,
-        done: false,
       })
     },
     deleteTodo(state, action: PayloadAction<string>) {

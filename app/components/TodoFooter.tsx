@@ -1,6 +1,8 @@
 'use client'
 
+import { useState } from 'react'
 import Button from './Button'
+import AddTodoModal from './AddTodoModal'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
 import { addTodo, deleteTodo, undo } from '../store/todosSlice'
 
@@ -8,9 +10,11 @@ export default function TodoFooter() {
   const dispatch = useAppDispatch()
   const hasItems = useAppSelector((state) => state.todos.items.length > 0)
   const hasHistory = useAppSelector((state) => state.todos.history.length > 0)
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
-  function handleAdd() {
-    dispatch(addTodo('New task'))
+  function handleConfirm(text: string) {
+    dispatch(addTodo(text))
+    setIsModalOpen(false)
   }
 
   function handleUndo() {
@@ -23,6 +27,11 @@ export default function TodoFooter() {
 
   return (
     <>
+      <AddTodoModal
+        isOpen={isModalOpen}
+        onConfirm={handleConfirm}
+        onCancel={() => setIsModalOpen(false)}
+      />
       <Button variant="outline" onClick={handleUndo} disabled={!hasHistory}>
         Undo
       </Button>
@@ -33,7 +42,7 @@ export default function TodoFooter() {
       >
         Delete
       </Button>
-      <Button onClick={() => handleAdd()} className="ml-auto">
+      <Button onClick={() => setIsModalOpen(true)} className="ml-auto">
         Add
       </Button>
     </>

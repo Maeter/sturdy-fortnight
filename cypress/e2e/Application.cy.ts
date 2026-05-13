@@ -1,17 +1,12 @@
-describe('Smoke', () => {
+describe('Application basic user journeys', () => {
   beforeEach(() => {
     cy.visit('/')
   })
 
-  it('renders the page', () => {
+  it('renders the page with initial status', () => {
     cy.get('main').should('be.visible')
-  })
-
-  it('renders the card title', () => {
     cy.contains('This is a technical proof').should('be.visible')
-  })
-
-  it('renders the footer action buttons', () => {
+    cy.contains('No items yet. Add one!').should('be.visible')
     cy.contains('button', 'Delete').should('be.visible')
     cy.contains('button', 'Add').should('be.visible')
   })
@@ -24,28 +19,18 @@ describe('Smoke', () => {
   })
 
   it('adds an item to the list and displays it', () => {
-    cy.contains('button', 'Add').click()
-    cy.get('input[placeholder="Task description…"]').type('Buy milk')
-    cy.contains('button', 'Add').first().click()
+    cy.addTodoItem('Buy milk')
     cy.contains('li', 'Buy milk').should('be.visible')
   })
 
   it('adds multiple items and shows them all in the list', () => {
     const items = ['Buy milk', 'Walk the dog', 'Read a book']
-    items.forEach((item) => {
-      cy.contains('button', 'Add').click()
-      cy.get('input[placeholder="Task description…"]').type(item)
-      cy.contains('button', 'Add').first().click()
-    })
-    items.forEach((item) => {
-      cy.contains('li', item).should('be.visible')
-    })
+    items.forEach((item) => cy.addTodoItem(item))
+    items.forEach((item) => cy.contains('li', item).should('be.visible'))
   })
 
   it('undoes an addition', () => {
-    cy.contains('button', 'Add').click()
-    cy.get('input[placeholder="Task description…"]').type('Buy milk')
-    cy.contains('button', 'Add').first().click()
+    cy.addTodoItem('Buy milk')
     cy.contains('li', 'Buy milk').should('be.visible')
 
     cy.get('button[aria-label="Undo"]').click()
@@ -54,14 +39,9 @@ describe('Smoke', () => {
 
   it('undoes a bulk deletion', () => {
     const items = ['Buy milk', 'Walk the dog']
-    items.forEach((item) => {
-      cy.contains('button', 'Add').click()
-      cy.get('input[placeholder="Task description…"]').type(item)
-      cy.contains('button', 'Add').first().click()
-    })
+    items.forEach((item) => cy.addTodoItem(item))
 
-    items.forEach((item) => cy.contains('li', item).click())
-    cy.contains('button', 'Delete').click()
+    cy.deleteTodoItems(items)
     items.forEach((item) => cy.contains('li', item).should('not.exist'))
 
     cy.get('button[aria-label="Undo"]').click()
@@ -72,15 +52,9 @@ describe('Smoke', () => {
     const toDelete = ['Buy milk', 'Walk the dog']
     const toKeep = 'Read a book'
 
-    ;[...toDelete, toKeep].forEach((item) => {
-      cy.contains('button', 'Add').click()
-      cy.get('input[placeholder="Task description…"]').type(item)
-      cy.contains('button', 'Add').first().click()
-    })
+    ;[...toDelete, toKeep].forEach((item) => cy.addTodoItem(item))
 
-    toDelete.forEach((item) => cy.contains('li', item).click())
-
-    cy.contains('button', 'Delete').click()
+    cy.deleteTodoItems(toDelete)
 
     toDelete.forEach((item) => cy.contains('li', item).should('not.exist'))
     cy.contains('li', toKeep).should('be.visible')

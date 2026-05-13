@@ -7,13 +7,13 @@ export type Todo = {
 
 type TodosState = {
   items: Todo[]
-  history: Todo[][]
+  snapshot: Todo[] | null
   selectedId: string | null
 }
 
 const initialState: TodosState = {
   items: [],
-  history: [],
+  snapshot: null,
   selectedId: null,
 }
 
@@ -22,25 +22,22 @@ const todosSlice = createSlice({
   initialState,
   reducers: {
     addTodo(state, action: PayloadAction<string>) {
-      state.history.push([...state.items])
-      state.items.push({
-        id: crypto.randomUUID(),
-        text: action.payload,
-      })
+      state.snapshot = [...state.items]
+      state.items.push({ id: crypto.randomUUID(), text: action.payload })
     },
     selectTodo(state, action: PayloadAction<string>) {
       state.selectedId =
         state.selectedId === action.payload ? null : action.payload
     },
     deleteTodo(state, action: PayloadAction<string>) {
-      state.history.push([...state.items])
+      state.snapshot = [...state.items]
       state.items = state.items.filter((item) => item.id !== action.payload)
       state.selectedId = null
     },
     undo(state) {
-      const previous = state.history.pop()
-      if (previous !== undefined) {
-        state.items = previous
+      if (state.snapshot !== null) {
+        state.items = state.snapshot
+        state.snapshot = null
         state.selectedId = null
       }
     },

@@ -9,7 +9,7 @@ import { addTodo, deleteTodo, undo } from '../store/todosSlice'
 export default function TodoFooter() {
   const dispatch = useAppDispatch()
   const selectedId = useAppSelector((state) => state.todos.selectedId)
-  const hasHistory = useAppSelector((state) => state.todos.history.length > 0)
+  const hasHistory = useAppSelector((state) => state.todos.snapshot !== null)
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   function handleConfirm(text: string) {

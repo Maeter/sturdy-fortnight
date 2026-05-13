@@ -12,7 +12,7 @@ export default function TodoFooter() {
   const hasSelection = useAppSelector(
     (state) => state.todos.selectedIds.length > 0
   )
-  const hasHistory = useAppSelector((state) => state.todos.snapshot !== null)
+  const hasHistory = useAppSelector((state) => state.todos.history.length > 0)
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   function handleConfirm(text: string) {

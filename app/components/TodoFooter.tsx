@@ -8,21 +8,13 @@ import { addTodo, deleteTodo, undo } from '../store/todosSlice'
 
 export default function TodoFooter() {
   const dispatch = useAppDispatch()
-  const hasItems = useAppSelector((state) => state.todos.items.length > 0)
+  const selectedId = useAppSelector((state) => state.todos.selectedId)
   const hasHistory = useAppSelector((state) => state.todos.history.length > 0)
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   function handleConfirm(text: string) {
     dispatch(addTodo(text))
     setIsModalOpen(false)
-  }
-
-  function handleUndo() {
-    dispatch(undo())
-  }
-
-  function handleDelete(id: string) {
-    dispatch(deleteTodo(id))
   }
 
   return (
@@ -32,13 +24,17 @@ export default function TodoFooter() {
         onConfirm={handleConfirm}
         onCancel={() => setIsModalOpen(false)}
       />
-      <Button variant="outline" onClick={handleUndo} disabled={!hasHistory}>
+      <Button
+        variant="outline"
+        onClick={() => dispatch(undo())}
+        disabled={!hasHistory}
+      >
         Undo
       </Button>
       <Button
         variant="outline"
-        onClick={() => handleDelete('placeholder-id')}
-        disabled={!hasItems}
+        onClick={() => selectedId && dispatch(deleteTodo(selectedId))}
+        disabled={!selectedId}
       >
         Delete
       </Button>

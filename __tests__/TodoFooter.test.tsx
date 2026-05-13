@@ -29,7 +29,7 @@ function renderWithStore({
   return store
 }
 
-const undoButton = () => screen.getAllByRole('button')[0]
+const undoButton = () => screen.getByRole('button', { name: 'Undo' })
 const deleteButton = () => screen.getByRole('button', { name: 'Delete' })
 const addButton = () => screen.getByRole('button', { name: 'Add' })
 

@@ -28,6 +28,7 @@ export default function TodoFooter() {
         onCancel={() => setIsModalOpen(false)}
       />
       <Button
+        aria-label="Undo"
         variant="outline"
         onClick={() => dispatch(undo())}
         disabled={!hasHistory}

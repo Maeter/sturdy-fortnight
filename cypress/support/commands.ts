@@ -1,7 +1,7 @@
 Cypress.Commands.add('addTodoItem', (text: string) => {
   cy.contains('button', 'Add').click()
   cy.get('input[placeholder="Task description…"]').type(text)
-  cy.contains('button', 'Add').first().click()
+  cy.contains('button', 'Save').click()
 })
 
 Cypress.Commands.add('deleteTodoItems', (texts: string[]) => {

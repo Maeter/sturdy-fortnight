@@ -66,7 +66,7 @@ export default function AddTodoModal({ isOpen, onConfirm, onCancel }: Props) {
                 Cancel
               </Button>
               <Button onClick={handleConfirm} disabled={!text.trim()}>
-                Add
+                Save
               </Button>
             </div>
           }

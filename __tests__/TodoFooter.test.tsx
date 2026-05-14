@@ -129,7 +129,7 @@ describe('Add', () => {
     await user.type(screen.getByPlaceholderText(placeholderText), 'New item')
     // Two "Add" buttons exist when the modal is open (modal confirm + footer).
     // The modal renders first in the DOM, so index 0 is the modal's confirm button.
-    await user.click(screen.getAllByRole('button', { name: 'Add' })[0])
+    await user.click(screen.getByRole('button', { name: 'Save' }))
     expect(store.getState().todos.items[0].text).toBe('New item')
     await waitFor(() =>
       expect(screen.queryByPlaceholderText(placeholderText)).toBeNull()

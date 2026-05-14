@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vanilla - String list manager</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @keyframes slide-in-down {
+        from {
+          transform: translateY(-100vh);
+        }
+        to {
+          transform: translateY(0);
+        }
+      }
+      @keyframes slide-out-up {
+        from {
+          transform: translateY(0);
+        }
+        to {
+          transform: translateY(-100vh);
+        }
+      }
+      .modal-enter {
+        animation: slide-in-down 300ms ease-out forwards;
+      }
+      .modal-exit {
+        animation: slide-out-up 300ms ease-in forwards;
+      }
+    </style>
+  </head>
+  <body class="flex min-h-screen flex-col">
+    <!-- Page -->
+    <main
+      class="flex flex-1 items-center justify-center bg-gradient-to-r from-sky-300 to-cyan-100"
+    >
+      <!-- Card -->
+      <div
+        class="m-8 flex w-full max-w-md flex-col gap-4 overflow-hidden rounded-2xl bg-white shadow-md"
+      >
+        <!-- Title -->
+        <div class="px-6 pt-4 text-center">
+          <h2 class="text-lg font-semibold text-zinc-800">
+            This is a technical proof
+          </h2>
+        </div>
+
+        <!-- Body -->
+        <div class="px-6">
+          <p class="mb-4 text-center text-sm text-zinc-500">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco.
+          </p>
+
+          <!-- Empty state -->
+          <p
+            id="empty-state"
+            class="mt-6 mb-4 text-center text-sm text-zinc-400"
+          >
+            No items yet. Add one!
+          </p>
+
+          <!-- List -->
+          <ul
+            id="todo-list"
+            role="listbox"
+            aria-label="Element list"
+            aria-multiselectable="true"
+            class="mt-6 mb-4 flex hidden flex-col gap-px rounded-md border border-zinc-100 bg-zinc-50 p-2"
+          ></ul>
+        </div>
+
+        <!-- Footer -->
+        <div class="flex gap-2 px-6 pb-4">
+          <button
+            id="undo-btn"
+            aria-label="Undo"
+            disabled
+            class="cursor-pointer rounded-full border border-blue-800 px-4 py-2 text-sm font-medium text-blue-800 uppercase transition-colors hover:bg-blue-50 active:bg-blue-100 disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="rotate-180"
+            >
+              <path d="M19.95 11a8 8 0 1 0 -.5 4m.5 5v-5h-5" />
+            </svg>
+          </button>
+
+          <button
+            id="delete-btn"
+            disabled
+            class="cursor-pointer rounded-full border border-blue-800 px-4 py-2 text-sm font-medium text-blue-800 uppercase transition-colors hover:bg-blue-50 active:bg-blue-100 disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            Delete
+          </button>
+
+          <button
+            id="add-btn"
+            class="ml-auto cursor-pointer rounded-full bg-blue-800 px-4 py-2 text-sm font-medium text-white uppercase transition-colors hover:bg-blue-700 active:bg-blue-900"
+          >
+            Add
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <!-- Modal -->
+    <div
+      id="modal"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Add new element to list"
+      class="fixed inset-0 z-50 flex hidden items-center justify-center bg-black/30"
+    >
+      <div id="modal-card" class="w-full max-w-md px-4">
+        <!-- Modal Card -->
+        <div
+          class="flex flex-col gap-4 overflow-hidden rounded-2xl bg-white shadow-md"
+        >
+          <!-- Body -->
+          <div class="px-6 pt-4">
+            <label
+              for="task-input"
+              class="mb-2 block font-medium text-zinc-600"
+            >
+              Add item to list
+            </label>
+            <input
+              id="task-input"
+              name="task-input"
+              placeholder="Task description…"
+              class="w-full rounded-md border border-zinc-200 px-4 py-2 text-sm text-zinc-800 focus:ring-2 focus:ring-blue-800 focus:outline-none"
+            />
+          </div>
+          <!-- Footer -->
+          <div class="flex justify-end gap-2 px-6 pb-4">
+            <button
+              id="modal-cancel-btn"
+              class="cursor-pointer rounded-full border border-blue-800 px-4 py-2 text-sm font-medium text-blue-800 uppercase transition-colors hover:bg-blue-50 active:bg-blue-100"
+            >
+              Cancel
+            </button>
+            <button
+              id="modal-confirm-btn"
+              disabled
+              class="cursor-pointer rounded-full bg-blue-800 px-4 py-2 text-sm font-medium text-white uppercase transition-colors hover:bg-blue-700 active:bg-blue-900 disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              Save
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

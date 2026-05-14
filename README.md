@@ -4,7 +4,13 @@ A TODO list app built as a frontend engineering technical assessment. It ships t
 
 ## Setup
 
-Requires Node 24.15.0 or later. Install dependencies:
+Requires Node 24.15.0 or later. This project uses [Yarn](https://yarnpkg.com/) as its package manager (v4, via Corepack). Enable it before installing:
+
+```bash
+corepack enable
+```
+
+Then install dependencies:
 
 ```bash
 yarn install

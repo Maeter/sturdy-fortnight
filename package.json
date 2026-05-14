@@ -10,6 +10,10 @@
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
     "e2e": "start-server-and-test dev http://localhost:3000 cypress:run",
+    "vanilla": "serve vanilla -p 3001",
+    "cypress:open:vanilla": "cypress open --config baseUrl=http://localhost:3001",
+    "cypress:run:vanilla": "cypress run --config baseUrl=http://localhost:3001",
+    "e2e:vanilla": "start-server-and-test vanilla http://localhost:3001 cypress:run:vanilla",
     "lint": "eslint",
     "prepare": "husky"
   },
@@ -41,6 +45,7 @@
     "lint-staged": "^17.0.4",
     "prettier": "3.8.3",
     "prettier-plugin-tailwindcss": "^0.8.0",
+    "serve": "^14.2.6",
     "start-server-and-test": "^3.0.5",
     "tailwindcss": "^4",
     "typescript": "^5",

@@ -1,4 +1,4 @@
-import Card from './components/Card'
+import Card from './components/common/Card'
 import TodoFooter from './components/TodoFooter'
 import TodoList from './components/TodoList'
 

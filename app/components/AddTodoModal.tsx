@@ -1,8 +1,8 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import Card from './Card'
-import Button from './Button'
+import Card from './common/Card'
+import Button from './common/Button'
 
 type Props = {
   isOpen: boolean

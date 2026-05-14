@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { IconRotate } from '@tabler/icons-react'
-import Button from './Button'
+import Button from './common/Button'
 import AddTodoModal from './AddTodoModal'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
 import { addTodo, deleteSelected, undo } from '../store/todosSlice'
@@ -39,10 +39,11 @@ export default function TodoFooter() {
         variant="outline"
         onClick={() => dispatch(deleteSelected())}
         disabled={!hasSelection}
+        className="min-w-24"
       >
         Delete
       </Button>
-      <Button onClick={() => setIsModalOpen(true)} className="ml-auto">
+      <Button onClick={() => setIsModalOpen(true)} className="ml-auto min-w-24">
         Add
       </Button>
     </>

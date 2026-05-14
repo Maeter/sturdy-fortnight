@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest'
 import { render, screen } from '@testing-library/react'
-import Card from '../app/components/Card'
+import Card from '../app/components/common/Card'
 
 test('renders children', () => {
   render(<Card>Body content</Card>)

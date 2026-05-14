@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest'
 import { render, screen } from '@testing-library/react'
-import Button from '../app/components/Button'
+import Button from '../app/components/common/Button'
 
 test('renders its label', () => {
   render(<Button>Click me</Button>)
